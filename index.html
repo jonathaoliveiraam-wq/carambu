@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alavanca Empresarial,Carambu Consultoria</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --laranja: #22C55E;
+      --laranja-escuro: #16A34A;
+      --dark: #0F1117;
+      --dark2: #181C24;
+      --dark3: #1F2430;
+      --cinza: #6B7280;
+      --cinza-claro: #9CA3AF;
+      --borda: rgba(255,255,255,0.08);
+      --branco: #FFFFFF;
+      --texto: #E5E7EB;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--dark);
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(15,17,23,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--borda);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .nav-logo .badge {
+      background: var(--laranja);
+      color: white;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo .empresa {
+      font-size: 0.85rem;
+      color: var(--cinza-claro);
+      font-weight: 500;
+    }
+
+    .nav-cta {
+      background: var(--laranja);
+      color: white;
+      padding: 10px 22px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--laranja-escuro); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(34,197,94,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.4);
+      color: var(--laranja);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 900;
+      line-height: 1.1;
+      color: var(--branco);
+      max-width: 820px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero h1 span { color: var(--laranja); }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--cinza-claro);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--laranja);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      background: var(--laranja-escuro);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(34,197,94,0.35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--cinza-claro);
+      padding: 16px 36px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      border: 1px solid var(--borda);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: var(--branco);
+    }
+    .stat span {
+      font-size: 0.82rem;
+      color: var(--cinza);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ── SECTIONS GERAIS ── */
+    section { padding: 5rem 1.5rem; }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: rgba(34,197,94,0.12);
+      color: var(--laranja);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 900;
+      color: var(--branco);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .section-title span { color: var(--laranja); }
+
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--cinza-claro);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ── PROBLEMA ── */
+    .problema { background: var(--dark2); }
+
+    .problema-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .problema-card {
+      background: var(--dark3);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 1.4rem 1.5rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      transition: border-color 0.2s;
+    }
+    .problema-card:hover { border-color: rgba(34,197,94,0.3); }
+
+    .problema-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(34,197,94,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+
+    .problema-card p {
+      font-size: 0.95rem;
+      color: var(--texto);
+      line-height: 1.5;
+    }
+
+    /* ── PROGRAMA ── */
+    .frentes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .frente-card {
+      background: var(--dark2);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 2rem 1.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .frente-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34,197,94,0.4);
+    }
+
+    .frente-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--laranja);
+    }
+
+    .frente-numero {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--laranja);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+
+    .frente-card h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--branco);
+      margin-bottom: 0.6rem;
+    }
+
+    .frente-card p {
+      font-size: 0.875rem;
+      color: var(--cinza-claro);
+      line-height: 1.6;
+    }
+
+    .convergencia {
+      margin-top: 3rem;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.25);
+      border-radius: 14px;
+      padding: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .convergencia-icon {
+      font-size: 2.5rem;
+      flex-shrink: 0;
+    }
+
+    .convergencia h4 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--laranja);
+      margin-bottom: 0.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .convergencia p {
+      font-size: 0.95rem;
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    /* ── ETAPAS ── */
+    .etapas { background: var(--dark2); }
+
+    .timeline {
+      margin-top: 3.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .etapa {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem;
+      padding-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .etapa:last-child { padding-bottom: 0; }
+
+    .etapa-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .etapa-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.12);
+      border: 2px solid rgba(34,197,94,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 900;
+      color: var(--laranja);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .etapa-line {
+      width: 2px;
+      flex: 1;
+      background: rgba(34,197,94,0.15);
+      margin-top: 8px;
+    }
+
+    .etapa:last-child .etapa-line { display: none; }
+
+    .etapa-content {
+      padding-top: 0.6rem;
+    }
+
+    .etapa-semana {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--laranja);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 0.3rem;
+    }
+
+    .etapa-content h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--branco);
+      margin-bottom: 0.4rem;
+    }
+
+    .etapa-content p {
+      font-size: 0.9rem;
+      color: var(--cinza-claro);
+      line-height: 1.6;
+    }
+
+    /* ── ENTREGÁVEIS ── */
+    .entregaveis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-top: 3rem;
+    }
+
+    .entregavel {
+      background: var(--dark2);
+      border: 1px solid var(--borda);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .entregavel:hover { border-color: rgba(34,197,94,0.3); }
+
+    .entregavel-check {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(34,197,94,0.15);
+      border: 1px solid rgba(34,197,94,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .entregavel h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--branco);
+      margin-bottom: 0.25rem;
+    }
+
+    .entregavel p {
+      font-size: 0.82rem;
+      color: var(--cinza);
+      line-height: 1.5;
+    }
+
+    /* ── PARA QUEM ── */
+    .para-quem { background: var(--dark2); }
+
+    .pq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 640px) { .pq-grid { grid-template-columns: 1fr; } }
+
+    .pq-box {
+      background: var(--dark3);
+      border: 1px solid var(--borda);
+      border-radius: 14px;
+      padding: 2rem;
+    }
+
+    .pq-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .pq-box.sim h3 { color: #4ADE80; }
+    .pq-box.nao h3 { color: #F87171; }
+
+    .pq-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      font-size: 0.9rem;
+      color: var(--texto);
+      line-height: 1.5;
+    }
+
+    .pq-item .dot {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 900;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .sim .dot { background: rgba(74,222,128,0.15); color: #4ADE80; }
+    .nao .dot { background: rgba(248,113,113,0.15); color: #F87171; }
+
+    /* ── SOBRE ── */
+    .sobre-inner {
+      background: var(--dark2);
+      border: 1px solid var(--borda);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 700px) {
+      .sobre-inner { grid-template-columns: 1fr; }
+    }
+
+    .sobre-texto h3 {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--branco);
+      margin-bottom: 1rem;
+    }
+
+    .sobre-texto p {
+      font-size: 0.95rem;
+      color: var(--cinza-claro);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .credencial {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--laranja);
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 8px;
+      margin-top: 0.5rem;
+    }
+
+    .sobre-nums {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .sobre-num {
+      text-align: center;
+    }
+
+    .sobre-num strong {
+      display: block;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--laranja);
+    }
+
+    .sobre-num span {
+      font-size: 0.8rem;
+      color: var(--cinza);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      background: linear-gradient(135deg, var(--dark2) 0%, #0a1410 100%);
+      border-top: 1px solid var(--borda);
+      text-align: center;
+    }
+
+    .cta-final h2 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 900;
+      color: var(--branco);
+      max-width: 680px;
+      margin: 0 auto 1rem;
+      line-height: 1.2;
+    }
+
+    .cta-final h2 span { color: var(--laranja); }
+
+    .cta-final p {
+      font-size: 1rem;
+      color: var(--cinza-claro);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-aviso {
+      margin-top: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--cinza);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--borda);
+      padding: 2rem 1.5rem;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 0.82rem;
+      color: var(--cinza);
+    }
+
+    footer strong { color: var(--cinza-claro); }
+
+    /* ── DIVISOR ── */
+    .divisor {
+      width: 48px;
+      height: 3px;
+      background: var(--laranja);
+      border-radius: 4px;
+      margin: 1rem 0 1.5rem;
+    }
+
+    /* ── MENTORES ── */
+    .mentores { background: var(--dark2); }
+
+    .mentores-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .mentor-card {
+      background: var(--dark3);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .mentor-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(34,197,94,0.35);
+    }
+
+    .mentor-foto {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 1.25rem;
+      overflow: hidden;
+      border: 3px solid rgba(34,197,94,0.4);
+      background: linear-gradient(135deg, #1F2430 0%, #2a2f3d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mentor-foto img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+    }
+
+    .mentor-foto .iniciais {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--laranja);
+      letter-spacing: -0.02em;
+    }
+
+    .mentor-card h3 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--branco);
+      margin-bottom: 0.25rem;
+    }
+
+    .mentor-cargo {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--laranja);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .mentor-card p {
+      font-size: 0.875rem;
+      color: var(--cinza-claro);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .mentor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .mentor-tag {
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.25);
+      color: var(--laranja);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── RESPONSIVO ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 1rem; }
+      section { padding: 4rem 1.25rem; }
+      .hero { padding: 6rem 1.25rem 4rem; }
+      .hero-stats { gap: 2rem; }
+      .sobre-inner { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <span class="badge">ALAVANCA EMPRESARIAL</span>
+      <span class="empresa">Carambu Consultoria</span>
+    </div>
+    <a href="#cta" class="nav-cta">Quero participar</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-tag">Programa para Micro e Pequenas Empresas · Camocim, CE</span>
+      <h1>Sua empresa trabalha <span>por você</span><br/>ou você trabalha por ela?</h1>
+      <p>Em 60 dias, estruturamos os processos que vão te dar controle real sobre o negócio,sem improviso, sem depender só de você.</p>
+      <div class="hero-ctas">
+        <a href="#cta" class="btn-primary">Quero estruturar minha empresa</a>
+        <a href="#programa" class="btn-secondary">Como funciona</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>60</strong>
+          <span>Dias de programa</span>
+        </div>
+        <div class="stat">
+          <strong>4</strong>
+          <span>Frentes de trabalho</span>
+        </div>
+        <div class="stat">
+          <strong>MPE</strong>
+          <span>Foco total</span>
+        </div>
+        <div class="stat">
+          <strong>CE</strong>
+          <span>Ceará</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMA -->
+  <section class="problema">
+    <div class="container">
+      <span class="section-tag">O problema</span>
+      <h2 class="section-title">Você se identifica com <span>pelo menos 3</span> dessas situações?</h2>
+      <div class="divisor"></div>
+      <div class="problema-grid">
+        <div class="problema-card">
+          <div class="problema-icon">01</div>
+          <p>Você sabe quanto fatura, mas não sabe quanto sobra de verdade no final do mês.</p>
+        </div>
+        <div class="problema-card">
+          <div class="problema-icon">02</div>
+          <p>Os processos da empresa existem só na sua cabeça. Quando você some, trava tudo.</p>
+        </div>
+        <div class="problema-card">
+          <div class="problema-icon">03</div>
+          <p>Cada dia é uma corrida apagando incêndio. Planejamento? Não sobra tempo.</p>
+        </div>
+        <div class="problema-card">
+          <div class="problema-icon">04</div>
+          <p>Decisões no feeling. Sem números, sem indicadores, sem clareza de onde está indo.</p>
+        </div>
+        <div class="problema-card">
+          <div class="problema-icon">05</div>
+          <p>A empresa cresceu até um ponto e travou. Você não consegue escalar sem se matar de trabalhar.</p>
+        </div>
+        <div class="problema-card">
+          <div class="problema-icon">06</div>
+          <p>Contrata, treina, a pessoa sai e você começa tudo do zero. A roda não para de girar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O PROGRAMA -->
+  <section id="programa">
+    <div class="container">
+      <span class="section-tag">O programa</span>
+      <h2 class="section-title">O <span>Alavanca Empresarial</span> é um programa de estruturação empresarial</h2>
+      <div class="divisor"></div>
+      <p class="section-sub">Trabalhamos 4 frentes ao mesmo tempo. Mas o resultado é um só: uma empresa que funciona com processos claros, financeiro organizado e decisões baseadas em dados.</p>
+
+      <div class="frentes-grid">
+        <div class="frente-card">
+          <div class="frente-numero">Frente 01</div>
+          <h3>Financeiro</h3>
+          <p>Visibilidade real do que entra, sai e sobra. Precificação correta. Separação entre pessoa física e empresa.</p>
+        </div>
+        <div class="frente-card">
+          <div class="frente-numero">Frente 02</div>
+          <h3>Processos</h3>
+          <p>Tudo que funciona na sua empresa documentado, padronizado e funcionando sem depender de você.</p>
+        </div>
+        <div class="frente-card">
+          <div class="frente-numero">Frente 03</div>
+          <h3>Inovação</h3>
+          <p>Melhorias práticas com impacto rápido. Sem tecnologia mirabolante,o que funciona para o seu negócio.</p>
+        </div>
+        <div class="frente-card">
+          <div class="frente-numero">Frente 04</div>
+          <h3>Governança</h3>
+          <p>Clareza de quem decide o quê, como a empresa funciona e quais são as regras do jogo.</p>
+        </div>
+      </div>
+
+      <div class="convergencia">
+        <div>
+          <h4>Tudo converge para um resultado</h4>
+          <p>Financeiro, inovação e governança são as lentes. O entregável final é sempre o mesmo: <strong>mapeamento e estruturação de processos</strong>,o que dá à sua empresa a base para crescer de forma sustentável e independente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ETAPAS -->
+  <section class="etapas">
+    <div class="container">
+      <span class="section-tag">Como funciona</span>
+      <h2 class="section-title">60 dias, <span>6 etapas</span>, 1 empresa diferente</h2>
+      <div class="divisor"></div>
+
+      <div class="timeline">
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">01</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 1–2</div>
+            <h3>Diagnóstico Empresarial</h3>
+            <p>Radiografia completa do negócio. Financeiro, operação, equipe e decisões. A gente entende onde está e identifica o que está travando o crescimento.</p>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">02</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 2–3</div>
+            <h3>Mapeamento de Processos</h3>
+            <p>Documentamos como a empresa funciona de verdade,não como deveria funcionar no papel. Identificamos gargalos, dependências e o que pode ser padronizado.</p>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">03</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 3–4</div>
+            <h3>Estruturação Financeira</h3>
+            <p>Organizamos o fluxo de caixa, corrigimos a precificação, separamos pessoal de empresa e criamos um dashboard que você realmente vai usar.</p>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">04</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 4–5</div>
+            <h3>Inovação e Melhoria</h3>
+            <p>Com base no diagnóstico, implementamos no mínimo 3 melhorias com impacto imediato. Simples, práticas, sem depender de tecnologia cara.</p>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">05</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 5–7</div>
+            <h3>Governança e Indicadores</h3>
+            <p>Definimos quem decide o quê, criamos os indicadores certos para o seu negócio e construímos uma rotina de gestão que o dono consegue manter.</p>
+          </div>
+        </div>
+
+        <div class="etapa">
+          <div class="etapa-left">
+            <div class="etapa-num">06</div>
+            <div class="etapa-line"></div>
+          </div>
+          <div class="etapa-content">
+            <div class="etapa-semana">Semanas 7–8</div>
+            <h3>Entrega + Plano de Continuidade</h3>
+            <p>Apresentação completa de tudo que foi construído. Relatório técnico, manual de processos e plano de ação para os próximos 90 dias.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENTREGÁVEIS -->
+  <section>
+    <div class="container">
+      <span class="section-tag">O que você leva</span>
+      <h2 class="section-title">Entregáveis concretos, <span>não só orientações</span></h2>
+      <div class="divisor"></div>
+      <p class="section-sub">Ao final do programa você tem documentos reais, prontos para usar. Não é teoria,é estrutura para sua empresa funcionar.</p>
+
+      <div class="entregaveis-grid">
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Mapa de Processos</h4>
+            <p>Todos os processos críticos documentados e visualizados de forma simples.</p>
+          </div>
+        </div>
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Manual de Procedimentos</h4>
+            <p>As pessoas certas fazendo as coisas certas, do jeito certo, sem depender de você.</p>
+          </div>
+        </div>
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Dashboard Financeiro</h4>
+            <p>Visão simples e direta do financeiro. Você entende sem precisar de contador do lado.</p>
+          </div>
+        </div>
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Indicadores de Desempenho</h4>
+            <p>Os KPIs certos para o seu tipo de negócio,vendas, operação e financeiro.</p>
+          </div>
+        </div>
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Plano de Ação 90 dias</h4>
+            <p>O que fazer depois que o programa termina. Com metas, responsáveis e prazo definido.</p>
+          </div>
+        </div>
+        <div class="entregavel">
+          <div class="entregavel-check">✓</div>
+          <div>
+            <h4>Relatório Técnico</h4>
+            <p>Documento formal de mapeamento e melhoria de processos. Credencial oficial do programa.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="para-quem">
+    <div class="container">
+      <span class="section-tag">Para quem é</span>
+      <h2 class="section-title">O Alavanca Empresarial <span>não é para todo mundo</span></h2>
+      <div class="divisor"></div>
+      <div class="pq-grid">
+        <div class="pq-box sim">
+          <h3>É para você se...</h3>
+          <div class="pq-item"><span class="dot">✓</span><span>Sua empresa já opera e tem pelo menos 1 ano no mercado</span></div>
+          <div class="pq-item"><span class="dot">✓</span><span>Você tem de 1 a 30 funcionários ou colaboradores</span></div>
+          <div class="pq-item"><span class="dot">✓</span><span>Quer parar de ser o gargalo da própria empresa</span></div>
+          <div class="pq-item"><span class="dot">✓</span><span>Sente que fatura mas não sobra e quer entender por quê</span></div>
+          <div class="pq-item"><span class="dot">✓</span><span>Quer crescer com estrutura e não no improviso</span></div>
+          <div class="pq-item"><span class="dot">✓</span><span>Está disposto a implementar o que for acordado</span></div>
+        </div>
+        <div class="pq-box nao">
+          <h3>Não é para você se...</h3>
+          <div class="pq-item"><span class="dot">✗</span><span>Ainda não tem empresa aberta ou ideia validada</span></div>
+          <div class="pq-item"><span class="dot">✗</span><span>Busca resultado sem colocar energia no processo</span></div>
+          <div class="pq-item"><span class="dot">✗</span><span>Não quer mudar a forma como gere o negócio</span></div>
+          <div class="pq-item"><span class="dot">✗</span><span>Acha que o problema da empresa é só marketing</span></div>
+          <div class="pq-item"><span class="dot">✗</span><span>Não consegue dedicar tempo para as sessões do programa</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section>
+    <div class="container">
+      <span class="section-tag">Quem conduz</span>
+      <h2 class="section-title">A <span>Carambu Consultoria</span></h2>
+      <div class="sobre-inner">
+        <div class="sobre-texto">
+          <h3>Consultoria do Ceará, para o Ceará.</h3>
+          <p>Somos de Camocim, entendemos a realidade das empresas do Ceará. Não chegamos com fórmulas prontas de capital,chegamos com metodologia e comprometimento com o resultado real do seu negócio.</p>
+          <p>O Alavanca Empresarial faz parte de um grupo de empresas presente em 4 estados, com soluções em diversas áreas,processos, finanças, inovação, estoque e muito mais. Uma plataforma completa de soluções para quem empreende e quer crescer com estrutura.</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:0.75rem;">
+            <span class="credencial">Credenciada em Mapeamento e Melhoria de Processos</span>
+            <span class="credencial">Credenciada Sebrae</span>
+          </div>
+        </div>
+        <div class="sobre-nums">
+          <div class="sobre-num">
+            <strong>+10k</strong>
+            <span>Empresas atendidas</span>
+          </div>
+          <div class="sobre-num">
+            <strong>4</strong>
+            <span>Estados de atuação</span>
+          </div>
+          <div class="sobre-num">
+            <strong>MPE</strong>
+            <span>Foco exclusivo</span>
+          </div>
+          <div class="sobre-num">
+            <strong>Sebrae</strong>
+            <span>Credenciada</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENTORES -->
+  <section class="mentores">
+    <div class="container">
+      <span class="section-tag">Quem vai conduzir</span>
+      <h2 class="section-title">Os <span>consultores</span> do programa</h2>
+      <div class="divisor"></div>
+      <p class="section-sub">Profissionais com vivência no mercado do Ceará, especializados nas frentes que mais travam o crescimento das pequenas empresas.</p>
+
+      <div class="mentores-grid">
+        <div class="mentor-card">
+          <div class="mentor-foto">
+            <img src="jonatha.jpeg" alt="Jonatha Oliveira" />
+          </div>
+          <h3>Jonatha Oliveira</h3>
+          <div class="mentor-cargo">Financeiro · Processos · Inovação</div>
+          <p>Especialista em estruturação empresarial, mapeamento e melhoria de processos. Atua com micro e pequenas empresas no Ceará com foco em resultado real e implementação prática.</p>
+          <div class="mentor-tags">
+            <span class="mentor-tag">Financeiro</span>
+            <span class="mentor-tag">Processos</span>
+            <span class="mentor-tag">Inovação</span>
+            <span class="mentor-tag">Governança</span>
+          </div>
+        </div>
+
+        <div class="mentor-card">
+          <div class="mentor-foto">
+            <!-- Substitua pela foto real: <img src="foto-parceira.jpg" alt="[Nome]" /> -->
+            <span class="iniciais">CC</span>
+          </div>
+          <h3>[Nome da Parceira]</h3>
+          <div class="mentor-cargo">Pessoas · Liderança · Cultura</div>
+          <p>Especialista em desenvolvimento de pessoas, liderança organizacional e cultura empresarial. Ajuda empresas a construírem times mais fortes e ambientes de trabalho mais saudáveis.</p>
+          <div class="mentor-tags">
+            <span class="mentor-tag">Liderança</span>
+            <span class="mentor-tag">Pessoas</span>
+            <span class="mentor-tag">Cultura</span>
+            <span class="mentor-tag">NR-1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="cta-final" id="cta">
+    <div class="container">
+      <h2>Pronto para <span>alavancar</span> sua empresa?</h2>
+      <p>As vagas são limitadas por turma. Atendemos Camocim e região de forma presencial. Entre em contato agora.</p>
+      <a href="https://wa.me/558500000000?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Alavanca%20Empresarial" class="btn-primary" target="_blank">
+        Falar no WhatsApp agora
+      </a>
+      <p class="cta-aviso">Resposta em até 24 horas · Sem compromisso</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p><strong>Carambu Consultoria</strong> · Camocim, Ceará · Programa Alavanca Empresarial</p>
+    <p style="margin-top:0.5rem;">Credenciada em Mapeamento e Melhoria de Processos</p>
+  </footer>
+
+</body>
+</html>

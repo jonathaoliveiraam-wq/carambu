@@ -665,91 +665,117 @@
     }
 
     /* ── MENTORES ── */
-    .mentores { background: var(--dark2); }
+    .mentores { background: var(--dark); }
 
     .mentores-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
-      margin-top: 3rem;
+      margin-top: 3.5rem;
     }
 
     .mentor-card {
-      background: var(--dark3);
+      background: var(--dark2);
       border: 1px solid var(--borda);
-      border-radius: 16px;
-      padding: 2rem;
-      text-align: center;
-      transition: transform 0.2s, border-color 0.2s;
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
     .mentor-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(34,197,94,0.35);
+      transform: translateY(-6px);
+      border-color: rgba(34,197,94,0.4);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
     }
 
     .mentor-foto {
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      margin: 0 auto 1.25rem;
+      width: 100%;
+      height: 460px;
       overflow: hidden;
-      border: 3px solid rgba(34,197,94,0.4);
-      background: linear-gradient(135deg, #1F2430 0%, #2a2f3d 100%);
+      position: relative;
+      background: var(--dark3);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
+    .mentor-foto::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to top, var(--dark2) 0%, transparent 100%);
+      pointer-events: none;
+    }
+
     .mentor-foto img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 15%;
+      object-position: center 10%;
+      transition: transform 0.4s;
     }
+    .mentor-card:hover .mentor-foto img { transform: scale(1.04); }
+
+    .mentor-dark-bg .mentor-foto { background: #000; }
 
     .mentor-foto .iniciais {
-      font-size: 2rem;
+      font-size: 5rem;
       font-weight: 900;
-      color: var(--laranja);
-      letter-spacing: -0.02em;
+      color: rgba(34,197,94,0.2);
+      letter-spacing: -0.04em;
+      user-select: none;
+    }
+
+    .mentor-info {
+      padding: 1.75rem 2rem 2rem;
     }
 
     .mentor-card h3 {
-      font-size: 1.1rem;
-      font-weight: 800;
+      font-size: 1.4rem;
+      font-weight: 900;
       color: var(--branco);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
+      letter-spacing: -0.02em;
     }
 
     .mentor-cargo {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       font-weight: 700;
       color: var(--laranja);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+    }
+
+    .mentor-divider {
+      width: 32px;
+      height: 2px;
+      background: var(--laranja);
+      border-radius: 2px;
       margin-bottom: 1rem;
     }
 
     .mentor-card p {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       color: var(--cinza-claro);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
     }
 
     .mentor-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
-      justify-content: center;
     }
 
     .mentor-tag {
-      background: rgba(34,197,94,0.1);
-      border: 1px solid rgba(34,197,94,0.25);
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
       color: var(--laranja);
       font-size: 0.72rem;
-      font-weight: 600;
-      padding: 3px 10px;
+      font-weight: 700;
+      padding: 4px 12px;
       border-radius: 100px;
+      letter-spacing: 0.04em;
     }
 
     /* ── RESPONSIVO ── */
@@ -1091,34 +1117,39 @@
       <p class="section-sub">Profissionais com vivência no mercado do Ceará, especializados nas frentes que mais travam o crescimento das pequenas empresas.</p>
 
       <div class="mentores-grid">
-        <div class="mentor-card">
+        <div class="mentor-card mentor-dark-bg">
           <div class="mentor-foto">
             <img src="jonatha.jpeg" alt="Jonatha Oliveira" />
           </div>
-          <h3>Jonatha Oliveira</h3>
-          <div class="mentor-cargo">Financeiro · Processos · Inovação</div>
-          <p>Especialista em estruturação empresarial, mapeamento e melhoria de processos. Atua com micro e pequenas empresas no Ceará com foco em resultado real e implementação prática.</p>
-          <div class="mentor-tags">
-            <span class="mentor-tag">Financeiro</span>
-            <span class="mentor-tag">Processos</span>
-            <span class="mentor-tag">Inovação</span>
-            <span class="mentor-tag">Governança</span>
+          <div class="mentor-info">
+            <h3>Jonatha Oliveira</h3>
+            <div class="mentor-cargo">Financeiro · Processos · Inovação</div>
+            <div class="mentor-divider"></div>
+            <p>Especialista em estruturação empresarial e mapeamento de processos. Atua com micro e pequenas empresas no Ceará com foco em resultado real, implementação prática e sem enrolação.</p>
+            <div class="mentor-tags">
+              <span class="mentor-tag">Financeiro</span>
+              <span class="mentor-tag">Processos</span>
+              <span class="mentor-tag">Inovação</span>
+            </div>
           </div>
         </div>
 
         <div class="mentor-card">
           <div class="mentor-foto">
-            <!-- Substitua pela foto real: <img src="foto-parceira.jpg" alt="[Nome]" /> -->
-            <span class="iniciais">CC</span>
+            <img src="joaquina.jpeg" alt="Joaquina" />
           </div>
-          <h3>[Nome da Parceira]</h3>
-          <div class="mentor-cargo">Pessoas · Liderança · Cultura</div>
-          <p>Especialista em desenvolvimento de pessoas, liderança organizacional e cultura empresarial. Ajuda empresas a construírem times mais fortes e ambientes de trabalho mais saudáveis.</p>
-          <div class="mentor-tags">
-            <span class="mentor-tag">Liderança</span>
-            <span class="mentor-tag">Pessoas</span>
-            <span class="mentor-tag">Cultura</span>
-            <span class="mentor-tag">NR-1</span>
+          <div class="mentor-info">
+            <h3>Joaquina</h3>
+            <div class="mentor-cargo">Pessoas · Liderança · Governança · NR-1</div>
+            <div class="mentor-divider"></div>
+            <p>Especialista em Desenvolvimento Humano, Neurociência e Psicologia Positiva. Com expertise na implementação da NR-1 e gestão de riscos psicossociais para fortalecimento da cultura organizacional e conformidade legal.</p>
+            <div class="mentor-tags">
+              <span class="mentor-tag">Pessoas</span>
+              <span class="mentor-tag">Liderança</span>
+              <span class="mentor-tag">Governança</span>
+              <span class="mentor-tag">NR-1</span>
+              <span class="mentor-tag">Neurociência</span>
+            </div>
           </div>
         </div>
       </div>

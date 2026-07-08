@@ -668,9 +668,9 @@
     .mentores { background: var(--dark); }
 
     .mentores-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
       margin-top: 3.5rem;
     }
 
@@ -679,40 +679,33 @@
       border: 1px solid var(--borda);
       border-radius: 20px;
       overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      transition: border-color 0.3s, box-shadow 0.3s;
     }
     .mentor-card:hover {
-      transform: translateY(-6px);
       border-color: rgba(34,197,94,0.4);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+
+    @media (max-width: 680px) {
+      .mentor-card { grid-template-columns: 1fr; }
     }
 
     .mentor-foto {
       width: 100%;
-      height: 460px;
+      min-height: 340px;
       overflow: hidden;
       position: relative;
-      background: #111;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mentor-foto::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: rgba(10,10,10,0.42);
-      z-index: 1;
-      pointer-events: none;
+      background: #0d0d0d;
     }
 
     .mentor-foto::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 140px;
-      background: linear-gradient(to top, var(--dark2) 0%, transparent 100%);
+      top: 0; right: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to right, transparent, var(--dark2));
       pointer-events: none;
       z-index: 2;
     }
@@ -720,40 +713,42 @@
     .mentor-foto img {
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 12%;
       transition: transform 0.4s;
-      position: relative;
-      z-index: 0;
+      display: block;
     }
-    .mentor-card:hover .mentor-foto img { transform: scale(1.04); }
+    .mentor-card:hover .mentor-foto img { transform: scale(1.03); }
 
     .mentor-foto .iniciais {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
       font-size: 5rem;
       font-weight: 900;
-      color: rgba(34,197,94,0.2);
-      letter-spacing: -0.04em;
-      user-select: none;
+      color: rgba(34,197,94,0.15);
     }
 
     .mentor-info {
-      padding: 1.75rem 2rem 2rem;
+      padding: 2.25rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .mentor-card h3 {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 900;
       color: var(--branco);
-      margin-bottom: 0.2rem;
+      margin-bottom: 0.25rem;
       letter-spacing: -0.02em;
     }
 
     .mentor-cargo {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--laranja);
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 1rem;
+      letter-spacing: 0.14em;
+      margin-bottom: 1.25rem;
     }
 
     .mentor-divider {
@@ -761,13 +756,13 @@
       height: 2px;
       background: var(--laranja);
       border-radius: 2px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     .mentor-card p {
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--cinza-claro);
-      line-height: 1.7;
+      line-height: 1.75;
       margin-bottom: 1.5rem;
     }
 
@@ -1129,7 +1124,7 @@
       <div class="mentores-grid">
         <div class="mentor-card">
           <div class="mentor-foto">
-            <img src="jonatha.jpeg" alt="Jonatha Oliveira" style="object-position: center 15%; transform: scale(1.9) translateY(12%);" />
+            <img src="jonatha.jpeg" alt="Jonatha Oliveira" style="object-position: center top;" />
           </div>
           <div class="mentor-info">
             <h3>Jonatha Oliveira</h3>
@@ -1146,7 +1141,7 @@
 
         <div class="mentor-card">
           <div class="mentor-foto">
-            <img src="joaquina.jpeg" alt="Joaquina" style="object-position: center 5%; transform: scale(1.15) translateY(4%);" />
+            <img src="joaquina.jpeg" alt="Joaquina" style="object-position: center top;" />
           </div>
           <div class="mentor-info">
             <h3>Joaquina</h3>

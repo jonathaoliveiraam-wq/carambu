@@ -713,6 +713,11 @@
       const q = questions[currentQ];
       const pillarIndex = Math.floor(currentQ / 3);
       const letters = ['A', 'B', 'C'];
+      const screen = document.getElementById('screen-question');
+
+      // Remove active para resetar a animação e limpar qualquer estado visual
+      screen.classList.remove('active');
+      screen.style.opacity = '0';
 
       document.getElementById('qPillar').textContent = q.pillar;
       document.getElementById('qText').textContent = q.text;
@@ -727,7 +732,7 @@
           <div class="option-letter">${letters[i]}</div>
           <div class="option-text">${opt.label}</div>
         `;
-        div.addEventListener('click', () => selectOption(div, opt.score, pillarIndex));
+        div.addEventListener('click', () => selectOption(opt.score, pillarIndex));
         optContainer.appendChild(div);
       });
 
@@ -736,9 +741,15 @@
       document.getElementById('progressFill').style.width = pct + '%';
       document.getElementById('progressCount').textContent = `${currentQ + 1} de ${questions.length}`;
       document.getElementById('progressLabel').textContent = pillarNames[pillarIndex];
+
+      // Re-ativa com animação limpa no próximo frame
+      requestAnimationFrame(() => {
+        screen.style.opacity = '';
+        screen.classList.add('active');
+      });
     }
 
-    function selectOption(el, score, pillarIndex) {
+    function selectOption(score, pillarIndex) {
       scores[pillarIndex] += score;
       currentQ++;
       if (currentQ < questions.length) {

@@ -143,6 +143,109 @@
     }
     .pilar-chip .chip-nome { font-size: 0.88rem; font-weight: 700; color: var(--branco); }
 
+    /* ── PREVIEW SECTION ── */
+    .preview-section {
+      width: 100%; max-width: 640px;
+      margin-top: 4rem; padding-top: 3rem;
+      border-top: 1px solid var(--borda);
+    }
+    .preview-section-title {
+      font-size: 0.7rem; font-weight: 800; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.16em;
+      text-align: center; margin-bottom: 2rem;
+    }
+    /* Passos */
+    .steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 3rem; }
+    .step {
+      display: grid; grid-template-columns: 44px 1fr;
+      gap: 1.25rem; position: relative; padding-bottom: 2rem;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step::before {
+      content: '';
+      position: absolute;
+      left: 21px; top: 44px; bottom: 0;
+      width: 2px;
+      background: rgba(34,197,94,0.12);
+    }
+    .step:last-child::before { display: none; }
+    .step-num {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--dark3); border: 2px solid rgba(34,197,94,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.85rem; font-weight: 900; color: var(--verde);
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .step-body { padding-top: 0.6rem; }
+    .step-title { font-size: 0.95rem; font-weight: 700; color: var(--branco); margin-bottom: 0.25rem; }
+    .step-desc { font-size: 0.85rem; color: var(--cinza-claro); line-height: 1.55; }
+    /* Exemplo de pergunta */
+    .sample-label {
+      font-size: 0.7rem; font-weight: 800; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.16em;
+      text-align: center; margin-bottom: 1.25rem;
+    }
+    .sample-card {
+      background: var(--dark2);
+      border: 1px solid var(--borda);
+      border-radius: 16px; padding: 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .sample-pillar {
+      font-size: 0.65rem; font-weight: 800; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 0.4rem;
+    }
+    .sample-q { font-size: 1.1rem; font-weight: 800; color: var(--branco); margin-bottom: 0.3rem; line-height: 1.3; }
+    .sample-hint { font-size: 0.8rem; color: var(--cinza); margin-bottom: 1.25rem; }
+    .sample-opts { display: flex; flex-direction: column; gap: 0.6rem; }
+    .sample-opt {
+      display: flex; align-items: center; gap: 0.85rem;
+      background: var(--dark3);
+      border: 1.5px solid var(--borda);
+      border-radius: 10px; padding: 0.85rem 1rem;
+    }
+    .sample-opt.demo-selected {
+      border-color: var(--verde);
+      background: rgba(34,197,94,0.08);
+    }
+    .sample-opt-letter {
+      width: 26px; height: 26px; border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--borda);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 800; color: var(--cinza-claro);
+      flex-shrink: 0;
+    }
+    .sample-opt.demo-selected .sample-opt-letter {
+      background: var(--verde); color: #000; border-color: var(--verde);
+    }
+    .sample-opt-text { font-size: 0.85rem; color: var(--texto); font-weight: 500; line-height: 1.4; }
+    .sample-opt.demo-selected .sample-opt-text { color: var(--branco); font-weight: 600; }
+    .sample-tag {
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      font-size: 0.72rem; color: var(--cinza); margin-top: 1rem;
+    }
+    /* O que você recebe */
+    .entrega-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+      margin-bottom: 3rem;
+    }
+    .entrega-item {
+      background: var(--dark2); border: 1px solid var(--borda);
+      border-radius: 12px; padding: 1.1rem;
+      display: flex; align-items: flex-start; gap: 0.65rem;
+    }
+    .entrega-check {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem; color: var(--verde); font-weight: 900; flex-shrink: 0; margin-top: 1px;
+    }
+    .entrega-item span { font-size: 0.82rem; color: var(--texto); line-height: 1.45; font-weight: 500; }
+    @media (max-width: 480px) {
+      .entrega-grid { grid-template-columns: 1fr; }
+    }
+
     /* ── BOTÃO ── */
     .btn-verde {
       background: var(--verde); color: #000;
@@ -315,6 +418,87 @@
         </div>
         <button class="btn-verde" onclick="startQuiz()">Fazer diagnóstico gratuito</button>
       </div>
+
+      <!-- SEÇÃO PREVIEW -->
+      <div class="preview-section">
+
+        <!-- Como funciona -->
+        <div class="preview-section-title">Como funciona</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <div class="step-title">Responda as perguntas do seu pilar</div>
+              <div class="step-desc">Cada pergunta tem 3 opções. Você clica na que melhor descreve a realidade atual da sua empresa, não a ideal.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <div class="step-title">A barra de progresso avança automaticamente</div>
+              <div class="step-desc">São 12 perguntas no total, 3 por pilar. Você vê em qual pilar está e quantas perguntas faltam.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <div class="step-title">Recebe o diagnóstico completo na tela</div>
+              <div class="step-desc">Uma nota por pilar, o gargalo principal identificado e o que o programa faz para resolver cada ponto fraco.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exemplo de pergunta -->
+        <div class="sample-label">Exemplo de pergunta</div>
+        <div class="sample-card">
+          <div class="sample-pillar">Pilar 01 · Financeiro</div>
+          <div class="sample-q">Você sabe quanto sobra no final do mês?</div>
+          <div class="sample-hint">Pense na última vez que fechou o caixa e viu o resultado real.</div>
+          <div class="sample-opts">
+            <div class="sample-opt">
+              <div class="sample-opt-letter">A</div>
+              <div class="sample-opt-text">Não tenho ideia, o dinheiro some e não sei por quê</div>
+            </div>
+            <div class="sample-opt demo-selected">
+              <div class="sample-opt-letter">B</div>
+              <div class="sample-opt-text">Tenho uma ideia aproximada, mas sem controle formal</div>
+            </div>
+            <div class="sample-opt">
+              <div class="sample-opt-letter">C</div>
+              <div class="sample-opt-text">Sei exatamente: tenho fluxo de caixa atualizado</div>
+            </div>
+          </div>
+          <div class="sample-tag">← Clique na opção que mais se aproxima da sua realidade</div>
+        </div>
+
+        <!-- O que você recebe -->
+        <div class="preview-section-title">O que você recebe ao final</div>
+        <div class="entrega-grid">
+          <div class="entrega-item">
+            <div class="entrega-check">✓</div>
+            <span>Nota por pilar: Financeiro, Processos, Inovação e Gente</span>
+          </div>
+          <div class="entrega-item">
+            <div class="entrega-check">✓</div>
+            <span>Identificação do pilar mais crítico do negócio</span>
+          </div>
+          <div class="entrega-item">
+            <div class="entrega-check">✓</div>
+            <span>Diagnóstico em 4 níveis: de Empresa em Risco a Estruturada</span>
+          </div>
+          <div class="entrega-item">
+            <div class="entrega-check">✓</div>
+            <span>Indicação do que o programa resolve na sua situação</span>
+          </div>
+        </div>
+
+        <div style="text-align:center; padding-bottom:2rem;">
+          <button class="btn-verde" onclick="startQuiz()">Começar agora — é gratuito</button>
+          <p style="margin-top:0.9rem; font-size:0.75rem; color:var(--cinza);">Sem cadastro · Resultado imediato · 3 minutos</p>
+        </div>
+
+      </div>
+    </div>
     </div>
 
     <!-- TELA 2: QUESTÃO -->

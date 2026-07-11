@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Empresarial — Alavanca Empresarial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --verde: #22C55E;
+      --verde-escuro: #16A34A;
+      --dark: #0A0D12;
+      --dark2: #111520;
+      --dark3: #181D2A;
+      --cinza: #6B7280;
+      --cinza-claro: #9CA3AF;
+      --borda: rgba(255,255,255,0.07);
+      --branco: #FFFFFF;
+      --texto: #D1D5DB;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--dark);
+      color: var(--texto);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(10,13,18,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--borda);
+      padding: 0 1.5rem; height: 60px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-badge {
+      background: var(--verde); color: #000;
+      font-weight: 900; font-size: 0.7rem;
+      padding: 4px 9px; border-radius: 6px; letter-spacing: 0.05em;
+    }
+    .nav-back {
+      font-size: 0.82rem; color: var(--cinza-claro);
+      text-decoration: none; font-weight: 500;
+      display: flex; align-items: center; gap: 0.4rem;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--verde); }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      min-height: 100vh;
+      padding: 80px 1.5rem 3rem;
+      display: flex; flex-direction: column; align-items: center;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-area {
+      width: 100%; max-width: 640px;
+      margin-bottom: 2.5rem;
+      display: none;
+    }
+    .progress-area.show { display: block; }
+    .progress-header {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 0.75rem;
+    }
+    .progress-label {
+      font-size: 0.72rem; font-weight: 700; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.12em;
+    }
+    .progress-count { font-size: 0.78rem; color: var(--cinza); }
+    .progress-track {
+      height: 4px; background: rgba(255,255,255,0.07);
+      border-radius: 4px; overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; background: var(--verde);
+      border-radius: 4px;
+      transition: width 0.5s ease;
+      width: 0%;
+    }
+
+    /* ── TELAS ── */
+    .screen { width: 100%; max-width: 640px; display: none; }
+    .screen.active { display: block; animation: fade-in 0.4s ease; }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── INTRO ── */
+    .intro { text-align: center; }
+    .intro-tag {
+      display: inline-block;
+      background: rgba(34,197,94,0.1);
+      border: 1px solid rgba(34,197,94,0.3);
+      color: var(--verde); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 1.5rem;
+    }
+    .intro h1 {
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
+      font-weight: 900; color: var(--branco); line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .intro h1 span { color: var(--verde); }
+    .intro p {
+      font-size: 1rem; color: var(--cinza-claro); line-height: 1.7;
+      max-width: 500px; margin: 0 auto 2rem;
+    }
+    .intro-meta {
+      display: flex; justify-content: center; gap: 2rem;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .meta-item {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--cinza);
+    }
+    .meta-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--verde);
+    }
+    .pilares-preview {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 0.75rem; margin-bottom: 2.5rem;
+    }
+    .pilar-chip {
+      background: var(--dark2);
+      border: 1px solid var(--borda);
+      border-radius: 10px; padding: 0.75rem 1rem;
+      text-align: left;
+    }
+    .pilar-chip .chip-num {
+      font-size: 0.65rem; font-weight: 800; color: var(--verde);
+      letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.25rem;
+    }
+    .pilar-chip .chip-nome { font-size: 0.88rem; font-weight: 700; color: var(--branco); }
+
+    /* ── BOTÃO ── */
+    .btn-verde {
+      background: var(--verde); color: #000;
+      padding: 16px 40px; border-radius: 10px;
+      font-weight: 800; font-size: 1rem;
+      border: none; cursor: pointer;
+      transition: all 0.2s; display: inline-block;
+    }
+    .btn-verde:hover { background: var(--verde-escuro); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(34,197,94,0.35); }
+    .btn-outline {
+      background: transparent; color: var(--cinza-claro);
+      padding: 14px 32px; border-radius: 10px;
+      font-weight: 600; font-size: 0.9rem;
+      border: 1px solid var(--borda); cursor: pointer;
+      transition: all 0.2s; display: inline-block;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.2); color: white; }
+
+    /* ── QUESTÃO ── */
+    .question-pillar {
+      font-size: 0.7rem; font-weight: 800; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 0.5rem;
+    }
+    .question-text {
+      font-size: clamp(1.2rem, 3vw, 1.5rem);
+      font-weight: 800; color: var(--branco); line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .question-hint {
+      font-size: 0.85rem; color: var(--cinza); margin-bottom: 2rem;
+    }
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option {
+      background: var(--dark2);
+      border: 2px solid var(--borda);
+      border-radius: 14px; padding: 1.1rem 1.4rem;
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 1rem;
+      position: relative; overflow: hidden;
+    }
+    .option:hover {
+      border-color: rgba(34,197,94,0.4);
+      background: rgba(34,197,94,0.05);
+    }
+    .option.selected {
+      border-color: var(--verde);
+      background: rgba(34,197,94,0.1);
+    }
+    .option-letter {
+      width: 30px; height: 30px; border-radius: 8px;
+      background: var(--dark3); border: 1px solid var(--borda);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 800; color: var(--cinza-claro);
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .option.selected .option-letter {
+      background: var(--verde); color: #000; border-color: var(--verde);
+    }
+    .option-text { font-size: 0.95rem; color: var(--texto); line-height: 1.4; font-weight: 500; }
+    .option.selected .option-text { color: var(--branco); font-weight: 600; }
+
+    /* ── RESULTADO ── */
+    .result { text-align: center; }
+    .result-badge {
+      display: inline-block;
+      padding: 8px 20px; border-radius: 100px;
+      font-size: 0.78rem; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 1.5rem;
+    }
+    .badge-risco { background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.3); }
+    .badge-fragil { background: rgba(251,146,60,0.15); color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+    .badge-potencial { background: rgba(250,204,21,0.15); color: #facc15; border: 1px solid rgba(250,204,21,0.3); }
+    .badge-estruturada { background: rgba(34,197,94,0.15); color: var(--verde); border: 1px solid rgba(34,197,94,0.3); }
+
+    .result h2 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900; color: var(--branco); line-height: 1.15; margin-bottom: 0.75rem;
+    }
+    .result-desc {
+      font-size: 0.98rem; color: var(--cinza-claro);
+      max-width: 520px; margin: 0 auto 2.5rem; line-height: 1.7;
+    }
+
+    /* Barras de pilar */
+    .pilares-result {
+      display: flex; flex-direction: column; gap: 1rem;
+      margin-bottom: 2.5rem; text-align: left;
+    }
+    .pilar-row {}
+    .pilar-row-header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 0.5rem;
+    }
+    .pilar-row-name { font-size: 0.85rem; font-weight: 700; color: var(--branco); }
+    .pilar-row-score { font-size: 0.8rem; font-weight: 800; color: var(--verde); }
+    .pilar-track {
+      height: 8px; background: rgba(255,255,255,0.07);
+      border-radius: 8px; overflow: hidden;
+    }
+    .pilar-bar {
+      height: 100%; border-radius: 8px; width: 0%;
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .pilar-bar.risco { background: linear-gradient(90deg, #ef4444, #f87171); }
+    .pilar-bar.fragil { background: linear-gradient(90deg, #f97316, #fb923c); }
+    .pilar-bar.medio { background: linear-gradient(90deg, #eab308, #facc15); }
+    .pilar-bar.bom { background: linear-gradient(90deg, var(--verde-escuro), var(--verde)); }
+
+    .result-ctas {
+      display: flex; flex-direction: column; gap: 0.75rem;
+      align-items: center; margin-top: 0.5rem;
+    }
+    .result-ctas .btn-verde { width: 100%; max-width: 400px; text-align: center; text-decoration: none; display: block; }
+    .result-nota { font-size: 0.75rem; color: var(--cinza); margin-top: 1rem; }
+
+    .result-aviso {
+      background: rgba(34,197,94,0.07);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 14px; padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem; text-align: left;
+    }
+    .result-aviso h4 {
+      font-size: 0.8rem; font-weight: 800; color: var(--verde);
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem;
+    }
+    .result-aviso p { font-size: 0.88rem; color: var(--texto); line-height: 1.6; }
+
+    @media (max-width: 480px) {
+      .pilares-preview { grid-template-columns: 1fr; }
+      .intro-meta { gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-badge">ALAVANCA EMPRESARIAL</span>
+    <a href="index.html" class="nav-back">← Voltar</a>
+  </nav>
+
+  <div class="wrapper">
+
+    <!-- BARRA DE PROGRESSO -->
+    <div class="progress-area" id="progressArea">
+      <div class="progress-header">
+        <span class="progress-label" id="progressLabel">Financeiro</span>
+        <span class="progress-count" id="progressCount">1 de 12</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- TELA 1: INTRO -->
+    <div class="screen active" id="screen-intro">
+      <div class="intro">
+        <span class="intro-tag">Diagnóstico gratuito · 3 minutos</span>
+        <h1>Como está a saúde da sua <span>empresa</span>?</h1>
+        <p>Responda 12 perguntas sobre os 4 pilares do negócio e descubra onde estão os gargalos que estão travando seu crescimento.</p>
+        <div class="intro-meta">
+          <span class="meta-item"><span class="meta-dot"></span>12 perguntas</span>
+          <span class="meta-item"><span class="meta-dot"></span>4 pilares avaliados</span>
+          <span class="meta-item"><span class="meta-dot"></span>Resultado imediato</span>
+        </div>
+        <div class="pilares-preview">
+          <div class="pilar-chip"><div class="chip-num">Pilar 01</div><div class="chip-nome">Financeiro</div></div>
+          <div class="pilar-chip"><div class="chip-num">Pilar 02</div><div class="chip-nome">Processos</div></div>
+          <div class="pilar-chip"><div class="chip-num">Pilar 03</div><div class="chip-nome">Inovação</div></div>
+          <div class="pilar-chip"><div class="chip-num">Pilar 04</div><div class="chip-nome">Gente & Gestão</div></div>
+        </div>
+        <button class="btn-verde" onclick="startQuiz()">Fazer diagnóstico gratuito</button>
+      </div>
+    </div>
+
+    <!-- TELA 2: QUESTÃO -->
+    <div class="screen" id="screen-question">
+      <div class="question-pillar" id="qPillar"></div>
+      <div class="question-text" id="qText"></div>
+      <div class="question-hint" id="qHint"></div>
+      <div class="options" id="qOptions"></div>
+    </div>
+
+    <!-- TELA 3: RESULTADO -->
+    <div class="screen" id="screen-result">
+      <div class="result">
+        <div class="result-badge" id="resultBadge"></div>
+        <h2 id="resultTitle"></h2>
+        <p class="result-desc" id="resultDesc"></p>
+        <div class="pilares-result" id="pilaresResult"></div>
+        <div class="result-aviso" id="resultAviso"></div>
+        <div class="result-ctas">
+          <a href="https://wa.me/5588981057092?text=Ol%C3%A1%2C%20fiz%20o%20diagn%C3%B3stico%20do%20Alavanca%20Empresarial%20e%20quero%20saber%20mais%20sobre%20o%20programa"
+             class="btn-verde" target="_blank">
+            Quero minha vaga no programa
+          </a>
+          <button class="btn-outline" onclick="restartQuiz()">Refazer o diagnóstico</button>
+        </div>
+        <p class="result-nota">Atendimento presencial · Vagas limitadas por turma</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const questions = [
+      // FINANCEIRO
+      {
+        pillar: 'Pilar 01 · Financeiro',
+        text: 'Você sabe quanto sobra no final do mês?',
+        hint: 'Pense na última vez que fechou o caixa e viu o resultado real.',
+        options: [
+          { label: 'Não tenho ideia, o dinheiro some e não sei por quê', score: 1 },
+          { label: 'Tenho uma ideia aproximada, mas sem controle formal', score: 2 },
+          { label: 'Sei exatamente: tenho fluxo de caixa atualizado', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 01 · Financeiro',
+        text: 'Como você separa as finanças da empresa das suas pessoais?',
+        hint: 'Contas, cartões, pagamentos do dia a dia.',
+        options: [
+          { label: 'Não separo, tudo cai na mesma conta', score: 1 },
+          { label: 'Tento separar, mas às vezes misturo', score: 2 },
+          { label: 'Tenho contas separadas e pró-labore definido', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 01 · Financeiro',
+        text: 'Você sabe o custo real de cada produto ou serviço que vende?',
+        hint: 'Custo direto, impostos, hora do time, margem de lucro.',
+        options: [
+          { label: 'Precedifico por intuição ou olhando a concorrência', score: 1 },
+          { label: 'Faço um cálculo básico mas não considero tudo', score: 2 },
+          { label: 'Tenho planilha de precificação com todos os custos', score: 3 },
+        ]
+      },
+
+      // PROCESSOS
+      {
+        pillar: 'Pilar 02 · Processos',
+        text: 'O que acontece na sua empresa quando você não está presente?',
+        hint: 'Uma viagem, uma doença, um dia de folga.',
+        options: [
+          { label: 'Trava tudo. Ninguém sabe o que fazer', score: 1 },
+          { label: 'Continua parcialmente, mas com muitos erros', score: 2 },
+          { label: 'Funciona normalmente, o time resolve', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 02 · Processos',
+        text: 'Como os processos da sua empresa estão documentados?',
+        hint: 'Como novos funcionários aprendem a fazer as coisas.',
+        options: [
+          { label: 'Nada documentado. O jeito de fazer está na minha cabeça', score: 1 },
+          { label: 'Algumas anotações soltas, mas nada formal', score: 2 },
+          { label: 'Temos manuais e procedimentos escritos e usados', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 02 · Processos',
+        text: 'Quando acontece um erro operacional, o que você faz?',
+        hint: 'Pedido errado, prazo perdido, falha com cliente.',
+        options: [
+          { label: 'Resolvo o problema do dia e sigo em frente', score: 1 },
+          { label: 'Converso com a equipe mas não registro nada', score: 2 },
+          { label: 'Identificamos a causa raiz e ajustamos o processo', score: 3 },
+        ]
+      },
+
+      // INOVAÇÃO
+      {
+        pillar: 'Pilar 03 · Inovação',
+        text: 'Com que frequência você melhora a forma como a empresa opera?',
+        hint: 'Novos métodos, ferramentas, formas de atender.',
+        options: [
+          { label: 'Raramente. Funciona assim há anos', score: 1 },
+          { label: 'Quando aparece um problema grande que me força', score: 2 },
+          { label: 'Periodicamente, buscamos melhorias de forma estruturada', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 03 · Inovação',
+        text: 'Como você toma as principais decisões na empresa?',
+        hint: 'Contratar, investir, mudar produto, abrir novo horário.',
+        options: [
+          { label: 'No feeling, baseado na experiência e intuição', score: 1 },
+          { label: 'Misturo intuição com alguns números que tenho', score: 2 },
+          { label: 'Analiso dados, indicadores e histórico antes de decidir', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 03 · Inovação',
+        text: 'Que ferramentas você usa para gerenciar a empresa?',
+        hint: 'Sistemas, apps, planilhas, agendas.',
+        options: [
+          { label: 'Nenhuma, faço tudo de cabeça ou em papel', score: 1 },
+          { label: 'Planilha básica e WhatsApp para tudo', score: 2 },
+          { label: 'Uso sistemas integrados adequados ao meu negócio', score: 3 },
+        ]
+      },
+
+      // GENTE & GESTÃO
+      {
+        pillar: 'Pilar 04 · Gente & Gestão',
+        text: 'Sua equipe sabe claramente o que é esperado de cada pessoa?',
+        hint: 'Funções, responsabilidades, metas individuais.',
+        options: [
+          { label: 'Não. Cada um faz o que acha que deve fazer', score: 1 },
+          { label: 'Mais ou menos, mas sem clareza formal', score: 2 },
+          { label: 'Sim. Temos cargos, funções e expectativas bem definidas', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 04 · Gente & Gestão',
+        text: 'Você acompanha o desempenho da sua equipe com indicadores?',
+        hint: 'Metas, resultados, produtividade, qualidade.',
+        options: [
+          { label: 'Não tenho indicadores. Acompanho no olho', score: 1 },
+          { label: 'Acompanho informalmente, sem dados formais', score: 2 },
+          { label: 'Tenho KPIs definidos e reuniões de acompanhamento', score: 3 },
+        ]
+      },
+      {
+        pillar: 'Pilar 04 · Gente & Gestão',
+        text: 'Como você descreveria o clima da sua equipe hoje?',
+        hint: 'Engajamento, motivação, comunicação interna.',
+        options: [
+          { label: 'Há conflitos, falta de comunicação e rotatividade alta', score: 1 },
+          { label: 'Razoável. Tem problemas mas nada grave', score: 2 },
+          { label: 'Time engajado, alinhado e com cultura definida', score: 3 },
+        ]
+      },
+    ];
+
+    const pillarNames = ['Financeiro', 'Processos', 'Inovação', 'Gente & Gestão'];
+    const pillarColors = ['bom', 'bom', 'bom', 'bom']; // definido na hora
+
+    let currentQ = 0;
+    let scores = [0, 0, 0, 0]; // por pilar
+
+    function startQuiz() {
+      showScreen('screen-question');
+      document.getElementById('progressArea').classList.add('show');
+      currentQ = 0;
+      scores = [0, 0, 0, 0];
+      renderQuestion();
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      const pillarIndex = Math.floor(currentQ / 3);
+      const letters = ['A', 'B', 'C'];
+
+      document.getElementById('qPillar').textContent = q.pillar;
+      document.getElementById('qText').textContent = q.text;
+      document.getElementById('qHint').textContent = q.hint;
+
+      const optContainer = document.getElementById('qOptions');
+      optContainer.innerHTML = '';
+      q.options.forEach((opt, i) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `
+          <div class="option-letter">${letters[i]}</div>
+          <div class="option-text">${opt.label}</div>
+        `;
+        div.addEventListener('click', () => selectOption(div, opt.score, pillarIndex));
+        optContainer.appendChild(div);
+      });
+
+      // Progress
+      const pct = (currentQ / questions.length) * 100;
+      document.getElementById('progressFill').style.width = pct + '%';
+      document.getElementById('progressCount').textContent = `${currentQ + 1} de ${questions.length}`;
+      document.getElementById('progressLabel').textContent = pillarNames[pillarIndex];
+    }
+
+    function selectOption(el, score, pillarIndex) {
+      // Marca selecionada
+      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      el.classList.add('selected');
+      scores[pillarIndex] += score;
+
+      // Avança após delay
+      setTimeout(() => {
+        currentQ++;
+        if (currentQ < questions.length) {
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 550);
+    }
+
+    function showResult() {
+      document.getElementById('progressFill').style.width = '100%';
+      document.getElementById('progressCount').textContent = `12 de 12`;
+
+      const total = scores.reduce((a, b) => a + b, 0);
+      const maxTotal = 36;
+      const pct = Math.round((total / maxTotal) * 100);
+
+      // Nível geral
+      let level, badgeClass, title, desc;
+      if (pct < 40) {
+        level = 'Empresa em Risco';
+        badgeClass = 'badge-risco';
+        title = 'Sua empresa precisa de estruturação urgente';
+        desc = 'Os dados mostram fragilidades sérias nos pilares do negócio. Sem uma base estruturada, o crescimento fica travado — ou pior, o negócio não se sustenta. Isso tem solução, e ela começa com os passos certos.';
+      } else if (pct < 60) {
+        level = 'Base Frágil';
+        badgeClass = 'badge-fragil';
+        title = 'Você avança na raça, mas sem estrutura pra escalar';
+        desc = 'A empresa funciona, mas depende demais de você e de improviso. Uma hora isso trava o crescimento. Você já percebe isso no dia a dia — falta tempo, falta margem, falta clareza. É possível mudar isso em 60 dias.';
+      } else if (pct < 80) {
+        level = 'Potencial Represado';
+        badgeClass = 'badge-potencial';
+        title = 'Sua empresa tem base, mas ainda deixa dinheiro na mesa';
+        desc = 'Você já tem algumas práticas no lugar, mas ainda existem lacunas importantes que custam caro: processos que dependem de você, indicadores que não usa, margem que não enxerga. Dá pra ir bem mais longe.';
+      } else {
+        level = 'Empresa Estruturada';
+        badgeClass = 'badge-estruturada';
+        title = 'Você tem uma base sólida. Hora de escalar.';
+        desc = 'Sua empresa já tem maturidade de gestão acima da média das MPEs. O Alavanca Empresarial pode ajudar a identificar e fechar as últimas lacunas para crescer de forma sustentável e segura.';
+      }
+
+      document.getElementById('resultBadge').textContent = level;
+      document.getElementById('resultBadge').className = `result-badge ${badgeClass}`;
+      document.getElementById('resultTitle').textContent = title;
+      document.getElementById('resultDesc').textContent = desc;
+
+      // Barras por pilar
+      const pilarMax = 9;
+      const pilarsDiv = document.getElementById('pilaresResult');
+      pilarsDiv.innerHTML = '';
+      scores.forEach((s, i) => {
+        const pctPilar = Math.round((s / pilarMax) * 100);
+        let barClass = pctPilar < 40 ? 'risco' : pctPilar < 60 ? 'fragil' : pctPilar < 80 ? 'medio' : 'bom';
+        const row = document.createElement('div');
+        row.className = 'pilar-row';
+        row.innerHTML = `
+          <div class="pilar-row-header">
+            <span class="pilar-row-name">${pillarNames[i]}</span>
+            <span class="pilar-row-score">${pctPilar}%</span>
+          </div>
+          <div class="pilar-track">
+            <div class="pilar-bar ${barClass}" id="bar-${i}"></div>
+          </div>
+        `;
+        pilarsDiv.appendChild(row);
+      });
+
+      // Pilar mais fraco
+      const minScore = Math.min(...scores);
+      const weakIdx = scores.indexOf(minScore);
+      const weakName = pillarNames[weakIdx];
+      const avisos = [
+        `Seu maior risco está no <strong>Financeiro</strong>. Sem clareza de caixa, custo e margem, qualquer crescimento pode ser uma armadilha. O programa começa por aqui.`,
+        `Seus <strong>Processos</strong> são o principal gargalo. A empresa depende de você para tudo. O programa documenta, padroniza e libera sua cabeça.`,
+        `A <strong>Inovação</strong> está parada. Decisões no feeling e ferramentas precárias travam a evolução. O programa implanta melhorias práticas com impacto rápido.`,
+        `<strong>Gente & Gestão</strong> é onde mais se perde. Time sem clareza, sem indicadores e sem cultura definida. O programa estrutura isso da raiz.`,
+      ];
+      document.getElementById('resultAviso').innerHTML = `
+        <h4>Atenção prioritária</h4>
+        <p>${avisos[weakIdx]}</p>
+      `;
+
+      showScreen('screen-result');
+
+      // Anima as barras depois de render
+      setTimeout(() => {
+        scores.forEach((s, i) => {
+          const pctPilar = Math.round((s / pilarMax) * 100);
+          const bar = document.getElementById(`bar-${i}`);
+          if (bar) bar.style.width = pctPilar + '%';
+        });
+      }, 200);
+    }
+
+    function restartQuiz() {
+      scores = [0, 0, 0, 0];
+      currentQ = 0;
+      showScreen('screen-intro');
+      document.getElementById('progressArea').classList.remove('show');
+      document.getElementById('progressFill').style.width = '0%';
+    }
+  </script>
+</body>
+</html>

@@ -60,13 +60,29 @@
       display: flex; flex-direction: column; align-items: center;
     }
 
+    /* ── QUIZ PAGE ── */
+    #quiz-page {
+      display: none;
+      min-height: 100vh;
+      padding: 80px 1.5rem 3rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--dark);
+    }
+    #quiz-page.active {
+      display: flex;
+    }
+    #quiz-page .screen {
+      width: 100%;
+      max-width: 640px;
+    }
+
     /* ── PROGRESS BAR ── */
     .progress-area {
       width: 100%; max-width: 640px;
       margin-bottom: 2.5rem;
-      display: none;
     }
-    .progress-area.show { display: block; }
     .progress-header {
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 0.75rem;
@@ -388,17 +404,6 @@
 
   <div class="wrapper">
 
-    <!-- BARRA DE PROGRESSO -->
-    <div class="progress-area" id="progressArea">
-      <div class="progress-header">
-        <span class="progress-label" id="progressLabel">Financeiro</span>
-        <span class="progress-count" id="progressCount">1 de 12</span>
-      </div>
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill"></div>
-      </div>
-    </div>
-
     <!-- TELA 1: INTRO -->
     <div class="screen active" id="screen-intro">
       <div class="intro">
@@ -499,6 +504,22 @@
 
       </div>
     </div>
+    </div>
+
+  </div>
+
+  <!-- QUIZ PAGE (aparece quando o quiz inicia) -->
+  <div id="quiz-page">
+
+    <!-- BARRA DE PROGRESSO (movida para cá) -->
+    <div class="progress-area" id="progressArea">
+      <div class="progress-header">
+        <span class="progress-label" id="progressLabel">Financeiro</span>
+        <span class="progress-count" id="progressCount">1 de 12</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
     </div>
 
     <!-- TELA 2: QUESTÃO -->
@@ -668,16 +689,24 @@
     let scores = [0, 0, 0, 0]; // por pilar
 
     function startQuiz() {
-      showScreen('screen-question');
-      document.getElementById('progressArea').classList.add('show');
       currentQ = 0;
       scores = [0, 0, 0, 0];
+      // Esconde intro, mostra quiz page
+      document.querySelector('.wrapper').style.display = 'none';
+      document.getElementById('quiz-page').classList.add('active');
+      window.scrollTo(0, 0);
+      showQuizScreen('screen-question');
       renderQuestion();
     }
 
-    function showScreen(id) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    function showQuizScreen(id) {
+      document.querySelectorAll('#quiz-page .screen').forEach(s => s.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+    }
+
+    function showScreen(id) {
+      // mantido para compatibilidade
+      showQuizScreen(id);
     }
 
     function renderQuestion() {
@@ -814,9 +843,11 @@
     function restartQuiz() {
       scores = [0, 0, 0, 0];
       currentQ = 0;
-      showScreen('screen-intro');
-      document.getElementById('progressArea').classList.remove('show');
       document.getElementById('progressFill').style.width = '0%';
+      // Volta para intro
+      document.getElementById('quiz-page').classList.remove('active');
+      document.querySelector('.wrapper').style.display = '';
+      window.scrollTo(0, 0);
     }
   </script>
 </body>

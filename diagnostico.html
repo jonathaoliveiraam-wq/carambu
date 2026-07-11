@@ -739,20 +739,13 @@
     }
 
     function selectOption(el, score, pillarIndex) {
-      // Marca selecionada
-      document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-      el.classList.add('selected');
       scores[pillarIndex] += score;
-
-      // Avança após delay
-      setTimeout(() => {
-        currentQ++;
-        if (currentQ < questions.length) {
-          renderQuestion();
-        } else {
-          showResult();
-        }
-      }, 550);
+      currentQ++;
+      if (currentQ < questions.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
     }
 
     function showResult() {
